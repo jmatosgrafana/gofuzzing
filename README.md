@@ -1,5 +1,5 @@
 # gofuzzing
-2 examples where [Go Fuzzing](https://go.dev/security/fuzz/) was used at Grafana Labs.
+2 examples where [Go Fuzzing](https://go.dev/security/fuzz/) was used at [Grafana Labs](https://github.com/grafana).
 
 Launch them from their respective folder with this command:
 <br>
