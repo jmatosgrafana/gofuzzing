@@ -12,19 +12,19 @@ func FuzzSymlinks(f *testing.F) {
         f.Add(tc)
     }
     f.Fuzz(func(t *testing.T, symlinkDestPath string) {
-        ok := isSymlinkRelativeTo("/base", symlinkDestPath, "/base/plugins/symlink.txt")
+        output := isSymlinkRelativeTo("/base", symlinkDestPath, "/base/plugins/symlink.txt")
         expected := expectedResult("/base", symlinkDestPath, "/base/plugins/symlink.txt")
 
-        //testing ok && !expected could be enough: not approving something that should not
-        if (ok != expected) {
-          t.Errorf("OK: %q, Expected: %t", symlinkDestPath, expected)
+        //testing output && !expected could be enough: not approving something that should not
+        if (output != expected) {
+          t.Errorf("Input: %q, Output: %t, Expected: %t", symlinkDestPath, output, expected)
         }
     })
 }
 
 func expectedResult(base string, destpath string, origpath string) bool {
   if strings.HasPrefix(destpath, "/") {
-    return false //naive implementation, should also check it's not base ? rather filepath Abs?
+    return false //naive implementation instead of filePath.IsAbs
   }
 
   merged := filepath.Join(filepath.Dir(origpath),destpath)
